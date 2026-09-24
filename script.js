@@ -3,53 +3,49 @@ const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
+
 const perguntas = [
     {
-        enunciado: "O cyberbullying é a violência virtual que ocorre geralmente com as pessoas tímidas e indefesas, ou simplesmente por não caírem na simpatia das mesmas. Como podemos evitá-lo",
+        enunciado: "Você percebe que um colega de classe está sendo isolado e alvo de piadas ofensivas em um grupo de mensagens da escola. Qual atitude você considera mais eficaz para enfrentar essa situação?",
         alternativas: [
             {
-                texto: "Utilizando palestras para prevenir o cyberbullying nas escolas.",
-                afirmacao: "Você é uma pessoa reflexiva e busca aprendizado e conhecimento."
+                texto: "Reportar as mensagens anonimamente à direção da escola e oferecer apoio privado à vítima.",
+                afirmacao: "Você age com empatia e responsabilidade, buscando canais oficiais para proteger quem está vulnerável sem se expor desnecessariamente."
             },
             {
-                texto:  "Prestando atenção aos sinais de cyberbullying nas escolas.",
-                afirmacao: "Você é uma pessoa observadora, pois se preocupa com o bem estar dos seus alunos."
+                texto: "Intervir diretamente no grupo, repreendendo os agressores e defendendo o colega publicamente.",
+                afirmacao: "Você possui um forte senso de justiça imediata e coragem, posicionando-se de forma direta contra o preconceito e a hostilidade."
             }    
-           
         ]
     },
     {
-       
-            enunciado: "As fontes renováveis de energia são aquelas formas de produção de energia em que suas fontes são capazes de manter-se disponíveis durante um longo prazo, contando com recursos que se regeneram ou que se mantêm ativos permanentemente. Com base nisso, temos a energia geotérmica, que consiste em utilizar o calor manifestado em áreas próximas à superfície. Qual a sua opinião sobre esse modelo de energia renovável?",
-            alternativas: [
-                {
-                    texto: "A energia geotérmica precisa ser mais explorada visto que utiliza o calor interno da terra, pois não depende do clima e é inesgotável.",
-                    afirmacao: "Você demonstra um perfil  de pesquisador e inovador que busca por meio da inovação soluções para o meio ambiente e sustentabilidade das gerações posteriores."
-                },
-                {
-                    texto:  "Seria interessante explorar primeiramente fontes renováveis exotérmicas, em segundo plano utilizar a energia geotérmica apesar dos custos elevados de explorações e possibilidades de contaminação de rios. ",
-                    afirmacao: "Você é uma pessoa que dá ênfase em priorizar os recursos disponíveis, pensando no meio ambiente e sem descartar o viés econômico."
-                }    
-               
-            ]
-        },
-        {
-            enunciado: "Hoje em dia é cada vez mais importante conhecer o seu corpo, suas qualidades, suas limitações e entender suas emoções. Saber controlá-las é o desafio das pessoas. A sua auto-estima impacta a sua qualidade de vida?",
+        enunciado: "Para erradicar o cyberbullying a longo prazo no ambiente escolar, qual dessas estratégias institucionais você acredita que traz melhores resultados práticos?",
+        alternativas: [
+            {
+                texto: "Criar palestras obrigatórias sobre empatia digital e incluir o uso responsável das redes sociais no currículo das aulas.",
+                afirmacao: "Você acredita no poder da educação preventiva e na conscientização contínua como as melhores ferramentas para mudar comportamentos."
+            },
+            {
+                texto: "Implementar canais rígidos de denúncia e aplicar punições severas no regimento interno da escola para quem comete a agressão.",
+                afirmacao: "Você prioriza a ordem e a segurança imediata, defendendo que regras claras e consequências firmes são essenciais para manter o respeito mútuo."
+            }    
+        ]
+    },
+    {
+        enunciado: "Muitas vezes, as vítimas de cyberbullying sofrem em silêncio por medo ou vergonha. Na sua opinião, qual é o principal sinal de alerta que a comunidade escolar deve observar?",
+        alternativas: [
+            {
+                texto: "Mudanças repentinas no comportamento do aluno, como isolamento social, queda brusca nas notas e recusa em ir à escola.",
+                afirmacao: "Você demonstra um perfil extremamente observador e sensível às mudanças emocionais, entendendo que o sofrimento psicológico reflete na rotina."
+            },
+            {
+                texto: "Uso excessivo ou reação de extrema ansiedade e irritabilidade sempre que o jovem interage com o celular ou computador.",
+                afirmacao: "Você tem uma visão analítica sobre a relação dos jovens com a tecnologia, identificando que o comportamento digital costuma ser o primeiro reflexo de um problema virtual."
+            }    
+        ]
+    }
+];
 
-            alternativas: [
-                {
-                    texto: "Na maior parte do tempo, com certeza impacta, pois é a partir da autoestima que temos um olhar positivo ou negativo sobre nossas ações diárias. Sempre estou em busca de mais autoconhecimento.",
-                    afirmacao: "Você tem consciência que é importante ter uma boa auto-estima e procura se aprofundar mais sobre o assunto, vendo a vida de um jeito positivo."
-                },
-                {
-                    texto:    "Apenas ocasionalmente ou raramente. Às vezes minha autoestima oscila e isso pode afetar negativamente minha qualidade de vida em certas ocasiões.",
-               
-                    afirmacao: "Você demomostra que precisa se conhecer mais e mostra uma consciência de uma crescente necessidade de cuidar mais da própria percepção e bem-estar emocional."
-                }    
-               
-            ]
-        },
-]
 let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
@@ -64,6 +60,7 @@ function mostraPergunta(){
     caixaAlternativas.textContent = "";
     mostraAlternativas();
 }
+
 function mostraAlternativas(){
     for(const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
@@ -71,27 +68,18 @@ function mostraAlternativas(){
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
         caixaAlternativas.appendChild(botaoAlternativas);
     }
-
 }
+
 function respostaSelecionada(opcaoSelecionada) {
-    const afirmacoes =  aleatorio (opcaoSelecionada.afirmacao);
-    historiaFinal += afirmacoes + " ";
-    atual++
+    historiaFinal += opcaoSelecionada.afirmacao + " ";
+    atual++;
     mostraPergunta();
-    
-    function aleatorio(lista) {
-const posicao = Math.floor(Math.random()* lista.length);
-return lista[posicao];
-}
-
 }
 
 function mostraResultado(){
-    caixaPerguntas.textContent = "Olha só o que podemos afirmar sobre você...";
+    caixaPerguntas.textContent = "Perfil de Conscientização Digital:";
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
 }
-
-
 
 mostraPergunta();
