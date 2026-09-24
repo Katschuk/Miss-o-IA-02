@@ -1,4 +1,4 @@
-const perguntas = [
+export const perguntas = [
     {
         enunciado: "Você percebe que um colega de classe está sendo isolado e alvo de piadas ofensivas em um grupo de mensagens da escola. Qual atitude você considera mais eficaz para enfrentar essa situação?",
         alternativas: [
